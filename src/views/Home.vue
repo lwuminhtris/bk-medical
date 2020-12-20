@@ -29,7 +29,7 @@
           <v-col md="auto" id="description">
             <h1>BỆNH VIỆN ĐẠI HỌC BÁCH KHOA</h1>
             <p>
-              TỰ HÀO LÀ ĐỊA ĐIỂM KHÁM VÀ CHỮA BỆNH HÀNG ĐẦU
+              BÁC ÁI - TÌNH THƯƠNG - TRÁCH NHIỆM
             </p>
           </v-col>
           <v-col md="auto">

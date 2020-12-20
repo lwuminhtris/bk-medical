@@ -3,6 +3,9 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Register from '../views/register.vue'
 import Login from '../views/login.vue'
+import DoctorDashboard from '../views/doctor-dashboard.vue'
+import DoctorViewInPatient from '../views/doctor-dashboard/inpatient.vue'
+import DoctorViewTest from '../views/doctor-dashboard/test.vue'
 
 Vue.use(VueRouter)
 
@@ -25,6 +28,21 @@ const routes = [
     path: '/login',
     name: 'login',
     component: Login
+  },
+  {
+    path: '/doctor-dashboard',
+    name: 'doctor-dashboard',
+    component: DoctorDashboard
+  },
+  {
+    path: '/doctor-dashboard/inpatient',
+    name: 'doctor-dashboard-inpatient',
+    component: DoctorViewInPatient
+  },
+  {
+    path: '/doctor-dashboard/test',
+    name: 'doctor-dashboard-test',
+    component: DoctorViewTest
   }
 ]
 
