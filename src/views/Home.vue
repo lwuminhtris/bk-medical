@@ -27,27 +27,20 @@
       <v-content>
         <v-row align="center" justify="center" style="margin-top: 50px;">
           <v-col md="auto" id="description">
-            <h1>HEADER</h1>
+            <h1>BỆNH VIỆN ĐẠI HỌC BÁCH KHOA</h1>
             <p>
-              DESCRIPTION
+              TỰ HÀO LÀ ĐỊA ĐIỂM KHÁM VÀ CHỮA BỆNH HÀNG ĐẦU
             </p>
-            <v-btn color="primary" to="frequently-asked-question">
-              <v-icon style="margin-right: 10px;">mdi-frequently-asked-questions</v-icon>Frequently Asked Question
-            </v-btn>
-            <v-btn color="error" to="sign-up" style="margin-left: 10px;">
-              Register Now !
-              <v-icon style="margin-bottom: -3px;">mdi-chevron-right</v-icon>
-            </v-btn>
           </v-col>
           <v-col md="auto">
-            <lottie-player src="https://assets10.lottiefiles.com/packages/lf20_Jos3jH.json"  background="transparent"  speed="1"  style="width: 400px; height: 400px;"  loop autoplay></lottie-player>
+            <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_vPnn3K.json"  background="transparent"  speed="1"  style="width: 400px; height: 400px;"  loop autoplay></lottie-player>
           </v-col>
         </v-row>
       </v-content>
       <v-bottom-navigation id="navfooter">
         <v-row align="center" justify="center">
           <v-col md="auto">
-            <p id="footer">© 2020 BK Hospital, 268 Ly Thuong Kiet St, 10th District, Ho Chi Minh City</p>
+            <p id="footer">© 2020 Bệnh viện Đại học Bách Khoa, 268 Lý Thường Kiệt, Quận 10, Thành phố Hồ Chí Minh</p>
           </v-col>
         </v-row>
       </v-bottom-navigation>

@@ -4,7 +4,6 @@
       <v-content>
         <v-row align="center" justify="center">
           <v-col md="auto">
-           <!-- <img src="../assets/home-logo.png" width="250px" height="auto" /> -->
           </v-col>
         </v-row>
         <v-row align="center" justify="center">
