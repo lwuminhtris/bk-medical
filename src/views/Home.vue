@@ -40,7 +40,7 @@
       <v-bottom-navigation id="navfooter">
         <v-row align="center" justify="center">
           <v-col md="auto">
-            <p id="footer">© 2020 Bệnh viện Đại học Bách Khoa, 268 Lý Thường Kiệt, Quận 10, Thành phố Hồ Chí Minh</p>
+            <p id="footer">© 2020 Bệnh viện Đại học Bách Khoa, 268 Lý Thường Kiệt, Phường 14, Quận 10, Thành phố Hồ Chí Minh</p>
           </v-col>
         </v-row>
       </v-bottom-navigation>

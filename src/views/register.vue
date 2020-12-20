@@ -8,6 +8,7 @@
         </v-row>
         <v-row align="center" justify="center">
           <v-col md="auto">
+            <h1 style="color: white; margin-bottom: 5px;"> ĐĂNG KÝ TÀI KHOẢN</h1>
                   <v-text-field
                     dark
                     v-model="username"
@@ -62,6 +63,16 @@
                     required
                     style="margin-top: -20px;"
                   ></v-text-field>
+
+                  <v-select
+                    dark
+                    v-model="gender"
+                    :items="genderList"
+                    outlined
+                    label="Giới tính"
+                    required
+                    style="margin-top: -20px;"
+                  ></v-select>
 
                   <v-text-field
                     dark
@@ -148,6 +159,8 @@ export default {
       address: "",
       phonenumber: "",
       medicalId: "",
+      gender: "",
+      genderList: ['Nam', 'Nữ'],
       numberOfStudent: 0,
       usernameRules: [
         (v) => !!v || "User is required",
