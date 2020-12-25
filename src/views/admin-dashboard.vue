@@ -223,22 +223,22 @@ export default {
       items: [
         {
           title: "Danh sách bác sĩ ",
-          icon: "mdi-plus-outline",
+          icon: "mdi-clipboard-list",
           link: "admin-dashboard",
         },
         {
           title: "Bệnh nhân nội trú",
-          icon: "mdi-security",
+          icon: "mdi-plus-thick",
           link: "../admin-dashboard/inpatient"
         },
         {
           title: "Bệnh nhân ngoại trú",
-          icon: "mdi-security",
+          icon: "mdi-plus-outline",
           link: "../admin-dashboard/outpatient",
         },
         {
           title: "Tìm kiếm nâng cao",
-          icon: "mdi-search",
+          icon: "mdi-account-search-outline",
           link: "../admin-dashboard/advanced-search"
         },
         { title: "Đăng xuất", icon: "mdi-logout-variant", link: "./" },

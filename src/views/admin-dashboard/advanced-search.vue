@@ -19,39 +19,17 @@
       </v-row>
       <v-row align="center" justify="center" style="margin-top: 80px;">
         <v-col md="auto" sm="auto">
+          <v-tabs>
+            <v-tabs-slider></v-tabs-slider>
+            <v-tab href="#tab1">Tổng số xét nghiệm cụ thể</v-tab>
+            <v-tab>Tổng bệnh nhân nhập viện cụ thể</v-tab>
+          </v-tabs>
 
-          <h3 style="color: white; margin-bottom: 10px;">CHỨC NĂNG CẬP NHẬT XÉT NGHIỆM CỦA BỆNH NHÂN</h3>
-
-          <v-text-field
-            dark
-            outlined
-            label="Mã id của bệnh nhân"
-            style="width: 500px;"
-          >
-            
-          </v-text-field>
-
-          <v-text-field
-            dark
-            outlined
-            label="Tên người xét nghiệm"
-            style="width: 500px; margin-top: -20px;"
-          >
-            
-          </v-text-field>
-
-          <v-textarea
-            outlined
-            dark
-            label="Thông tin chi tiết xét nghiệm"
-            style="margin-top: -20px;"
-          ></v-textarea>
-
-          <v-btn
-            style="margin-top: -20px; width: 100%;"
-          >
-            Cập nhật xét nghiệm
-          </v-btn>
+          <v-tabs-items>
+            <v-tab-item>
+              SSS
+            </v-tab-item>
+          </v-tabs-items>
         </v-col>
       </v-row>
     </v-content>
