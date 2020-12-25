@@ -1,5 +1,5 @@
 <template>
   <h1>
-    VIEW DÀNH CHO XÉT NGHIỆM
+    Kiểm tra xét nghiệm của bệnh nhân
   </h1>
 </template>
