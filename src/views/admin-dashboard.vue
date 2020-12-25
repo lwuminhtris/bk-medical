@@ -18,7 +18,7 @@
                 </v-list-item-avatar>
 
                 <v-list-item-content>
-                  <v-list-item-title>Chào bác sĩ</v-list-item-title>
+                  <v-list-item-title>Chào admin</v-list-item-title>
                   <v-list-item-subtitle>{{timestamp}}</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
@@ -51,7 +51,7 @@
           <v-col md="auto">
             <v-card style="margin-left: 120px; margin-right: -120px;" light>
               <v-card-title>
-                Danh sách bệnh nhân
+                Danh sách bác sĩ 
                 <v-spacer></v-spacer>
                 <v-text-field
                   v-model="search"
@@ -222,24 +222,24 @@ export default {
       drawer: true,
       items: [
         {
-          title: "Bệnh nhân ngoại trú",
+          title: "Danh sách bác sĩ ",
           icon: "mdi-plus-outline",
-          link: "doctor-dashboard",
+          link: "admin-dashboard",
         },
         {
           title: "Bệnh nhân nội trú",
-          icon: "mdi-plus-thick",
-          link: "doctor-dashboard/inpatient",
+          icon: "mdi-security",
+          link: "../admin-dashboard/inpatient"
         },
         {
-          title: "Cập nhật xét nghiệm",
+          title: "Bệnh nhân ngoại trú",
           icon: "mdi-security",
-          link: "../doctor-dashboard/update-test"
+          link: "admin-dashboard/outpatient",
         },
         {
-          title: "Kiểm tra xét nghiệm",
-          icon: "mdi-security",
-          link: "doctor-dashboard/view-test",
+          title: "Tìm kiếm nâng cao",
+          icon: "mdi-search",
+          link: "../admin-dashboard/advanced-search"
         },
         { title: "Đăng xuất", icon: "mdi-logout-variant", link: "login" },
       ],
@@ -254,8 +254,8 @@ export default {
           value: "dormUID",
         },
         { text: "Họ và tên", value: "name" },
-        { text: "Mã số CMND", value: "citizenId" },
-        { text: "Phòng bệnh", value: "room" },
+        { text: "Khoa ", value: "citizenId" },
+        { text: "Thời gian trực gần nhất", value: "room" },
         { text: "Email", value: "email" },
         { text: "Số điện thoại", value: "phone" },
       ],

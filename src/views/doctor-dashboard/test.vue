@@ -21,7 +21,7 @@
       <v-row align="center" justify="center" style="margin-top: 80px;">
           <h4 style="color: white;">CHỨC NĂNG KIỂM TRA XÉT NGHIỆM CỦA BỆNH NHÂN</h4>
       </v-row>
-      <v-row align="center" justify="center">
+      <v-row align="center" justify="center"  >
         <v-col md="auto" sm="auto">
           <v-text-field
             dark
