@@ -11,13 +11,17 @@
         <v-col md="200px">
 
         </v-col>
+        <!--
         <v-col md="auto" align-self="center">
           <h4 style="margin-right: 50px; color: white;">CHỨC NĂNG CẬP NHẬT XÉT NGHIỆM CỦA BỆNH NHÂN</h4>
         </v-col>
-
+        -->
       </v-row>
       <v-row align="center" justify="center" style="margin-top: 80px;">
         <v-col md="auto" sm="auto">
+
+          <h3 style="color: white; margin-bottom: 10px;">CHỨC NĂNG CẬP NHẬT XÉT NGHIỆM CỦA BỆNH NHÂN</h3>
+
           <v-text-field
             dark
             outlined

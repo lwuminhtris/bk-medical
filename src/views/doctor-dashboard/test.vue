@@ -11,12 +11,17 @@
         <v-col md="200px">
 
         </v-col>
+        <!--
         <v-col md="auto" align-self="center">
           <h4 style="margin-right: 50px; color: white;">CHỨC NĂNG KIỂM TRA XÉT NGHIỆM CỦA BỆNH NHÂN</h4>
         </v-col>
+        -->
 
       </v-row>
       <v-row align="center" justify="center" style="margin-top: 80px;">
+          <h4 style="color: white;">CHỨC NĂNG KIỂM TRA XÉT NGHIỆM CỦA BỆNH NHÂN</h4>
+      </v-row>
+      <v-row align="center" justify="center">
         <v-col md="auto" sm="auto">
           <v-text-field
             dark
@@ -69,8 +74,8 @@ export default {
       notation: '',
       headers: [
         { text: "Tên xét nghiệm", value: "title", sortable: false },
-        { text: "Bác sĩ thực hiện", value: "detail", sortable: false },
-        { text: "Ghi chú", value: "notation", sortable: false}
+        { text: "Người thực hiện", value: "detail", sortable: false },
+        { text: "Chi tiết xét nghiệm", value: "notation", sortable: false}
       ],
       health: [
         /*
