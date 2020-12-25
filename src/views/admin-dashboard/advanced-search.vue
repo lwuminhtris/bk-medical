@@ -13,7 +13,7 @@
         </v-col>
 
         <v-col md="auto" align-self="center">
-          <h4 style="margin-right: 50px; color: white;">CÁC CÔNG CỤ NÂNG CAO</h4>
+          <h4 style="margin-right: 50px; color: white;">TỔNG HỢP CÁC CÔNG CỤ NÂNG CAO</h4>
         </v-col>
 
       </v-row>
