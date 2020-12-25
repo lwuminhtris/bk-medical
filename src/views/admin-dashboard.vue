@@ -56,7 +56,7 @@
                 <v-text-field
                   v-model="search"
                   append-icon="mdi-magnify"
-                  label="Search"
+                  label="Tìm kiếm"
                   single-line
                   hide-details
                 ></v-text-field>
@@ -234,14 +234,14 @@ export default {
         {
           title: "Bệnh nhân ngoại trú",
           icon: "mdi-security",
-          link: "admin-dashboard/outpatient",
+          link: "../admin-dashboard/outpatient",
         },
         {
           title: "Tìm kiếm nâng cao",
           icon: "mdi-search",
           link: "../admin-dashboard/advanced-search"
         },
-        { title: "Đăng xuất", icon: "mdi-logout-variant", link: "login" },
+        { title: "Đăng xuất", icon: "mdi-logout-variant", link: "./" },
       ],
       permanent: true,
       background: false,

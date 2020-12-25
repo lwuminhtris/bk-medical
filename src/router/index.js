@@ -10,6 +10,10 @@ import DoctorViewTest from '../views/doctor-dashboard/test.vue'
 import DoctorUpdateTest from '../views/doctor-dashboard/update-test.vue'
 
 import AdminDashboard from '../views/admin-dashboard.vue'
+import AdminViewInPatient from '../views/admin-dashboard/inpatient.vue'
+import AdminViewOutPatient from '../views/admin-dashboard/outpatient.vue'
+import AdminAdvancedSearch from '../views/admin-dashboard/advanced-search.vue'
+
 
 Vue.use(VueRouter)
 
@@ -33,6 +37,8 @@ const routes = [
     name: 'login',
     component: Login
   },
+
+  // below is doctor routes
   {
     path: '/doctor-dashboard',
     name: 'doctor-dashboard',
@@ -53,10 +59,27 @@ const routes = [
     name: 'doctor-dashboard-test',
     component: DoctorViewTest
   },
+
+  // below is admin routes
   {
     path: '/admin-dashboard',
     name: 'admin-dashboard',
     component: AdminDashboard
+  },
+  {
+    path: '/admin-dashboard/inpatient',
+    name: 'admin-dashboard-inpatient',
+    component: AdminViewInPatient
+  },
+  {
+    path: '/admin-dashboard/outpatient',
+    name: 'admin-dashboard-outpatient',
+    component: AdminViewOutPatient
+  },
+  {
+    path: '/admin-dashboard/advanced-search',
+    name: 'admin-dashboard-advanced-search',
+    component: AdminAdvancedSearch
   }
 ]
 
