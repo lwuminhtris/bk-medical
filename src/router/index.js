@@ -6,6 +6,7 @@ import Login from '../views/login.vue'
 import DoctorDashboard from '../views/doctor-dashboard.vue'
 import DoctorViewInPatient from '../views/doctor-dashboard/inpatient.vue'
 import DoctorViewTest from '../views/doctor-dashboard/test.vue'
+import DoctorUpdateTest from '../views/doctor-dashboard/update-test.vue'
 
 Vue.use(VueRouter)
 
@@ -40,7 +41,12 @@ const routes = [
     component: DoctorViewInPatient
   },
   {
-    path: '/doctor-dashboard/test',
+    path: '/doctor-dashboard/update-test',
+    name: 'doctor-dashboard-update-test',
+    component: DoctorUpdateTest
+  },
+  {
+    path: '/doctor-dashboard/view-test',
     name: 'doctor-dashboard-test',
     component: DoctorViewTest
   }

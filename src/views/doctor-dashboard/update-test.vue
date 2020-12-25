@@ -12,7 +12,7 @@
 
         </v-col>
         <v-col md="auto" align-self="center">
-          <h4 style="margin-right: 50px; color: white;">CHỨC NĂNG KIỂM TRA XÉT NGHIỆM CỦA BỆNH NHÂN</h4>
+          <h4 style="margin-right: 50px; color: white;">CHỨC NĂNG CẬP NHẬT XÉT NGHIỆM CỦA BỆNH NHÂN</h4>
         </v-col>
 
       </v-row>
@@ -21,34 +21,33 @@
           <v-text-field
             dark
             outlined
-            label="Nhập mã id của bệnh nhân"
-            style="width: 300px;"
+            label="Mã id của bệnh nhân"
+            style="width: 500px;"
           >
             
           </v-text-field>
-        </v-col>
-        <v-col md="auto">
-          <v-btn
-            style="margin-top: -31px; height: 55px; margin-left: -10px;"
 
+          <v-text-field
+            dark
+            outlined
+            label="Tên người xét nghiệm"
+            style="width: 500px; margin-top: -20px;"
           >
-            Kiểm tra
+            
+          </v-text-field>
+
+          <v-textarea
+            outlined
+            dark
+            label="Thông tin chi tiết xét nghiệm"
+            style="margin-top: -20px;"
+          ></v-textarea>
+
+          <v-btn
+            style="margin-top: -20px; width: 100%;"
+          >
+            Cập nhật xét nghiệm
           </v-btn>
-        </v-col>
-      </v-row>
-      <v-row align="center" justify="center">
-        <v-col md="auto">
-          <v-data-table
-            :headers="headers"
-            :items="health"
-            item-key="name"
-          >
-            <template v-slot:expanded-item="{ headers }">
-              <td :colspan="headers.length">
-                
-              </td>
-            </template>
-          </v-data-table>
         </v-col>
       </v-row>
     </v-content>

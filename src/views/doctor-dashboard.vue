@@ -232,9 +232,14 @@ export default {
           link: "doctor-dashboard/inpatient",
         },
         {
-          title: "Danh sách xét nghiệm",
+          title: "Cập nhật xét nghiệm",
           icon: "mdi-security",
-          link: "doctor-dashboard/test",
+          link: "../doctor-dashboard/update-test"
+        },
+        {
+          title: "Kiểm tra xét nghiệm",
+          icon: "mdi-security",
+          link: "doctor-dashboard/view-test",
         },
         { title: "Đăng xuất", icon: "mdi-logout-variant", link: "login" },
       ],
