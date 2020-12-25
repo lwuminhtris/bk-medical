@@ -14,6 +14,8 @@ import AdminViewInPatient from '../views/admin-dashboard/inpatient.vue'
 import AdminViewOutPatient from '../views/admin-dashboard/outpatient.vue'
 import AdminAdvancedSearch from '../views/admin-dashboard/advanced-search.vue'
 
+import UserDashboard from '../views/user-dashboard.vue'
+
 
 Vue.use(VueRouter)
 
@@ -80,6 +82,16 @@ const routes = [
     path: '/admin-dashboard/advanced-search',
     name: 'admin-dashboard-advanced-search',
     component: AdminAdvancedSearch
+  },
+
+  // below is user dashboard
+  {
+    path: '/user-dashboard',
+    name: 'user-dashboard',
+    component: UserDashboard
+  },
+  {
+    
   }
 ]
 
