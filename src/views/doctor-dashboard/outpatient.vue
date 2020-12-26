@@ -51,7 +51,7 @@
           <v-col md="auto">
             <v-card style="margin-left: 120px; margin-right: -120px;" light>
               <v-card-title>
-                Danh sách bệnh nhân nội trú
+                Danh sách bệnh nhân ngoại trú
                 <v-spacer></v-spacer>
                 <v-text-field
                   v-model="search"
@@ -70,127 +70,6 @@
                 item-key="name"
                 show-expand
               >
-              <!--
-                <template v-slot:expanded-item="{ headers, item}">
-                  <td :colspan="headers.length">
-                      <v-btn
-                        color="primary" 
-                        dark
-                        style="margin-left: 50px; font-size: 12px;"
-                        @click.stop="sendNoti = true"
-                      >
-                        Send Notification
-                      </v-btn>
-                      <v-btn
-                        color="error"
-                        dark
-                        style="margin-left: 5px; font-size: 12px;"
-                        @click.stop="update = true"
-                      >
-                        Update information
-                      </v-btn>
-                      <v-dialog v-model="update" width="600">
-                        <v-card>
-                          <v-card-title 
-                            class="headline"
-                          >
-                            Update student information
-                          </v-card-title>
-                          <v-text-field
-                            outlined
-                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
-                            label="Citizen Id"
-                            v-model="citizenId"
-                          >
-                          
-                          </v-text-field>
-                          <v-text-field
-                            outlined
-                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
-                            label="Room"
-                            v-model="room"
-                          >
-                          
-                          </v-text-field>
-                          <v-text-field
-                            outlined
-                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
-                            label="Email"
-                            v-model="email"
-                          >
-                          
-                          </v-text-field>
-                          <v-text-field
-                            outlined
-                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
-                            label="Student ID"
-                            v-model="studentId"
-                          >
-                          
-                          </v-text-field>
-                          <v-text-field
-                            outlined
-                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
-                            label="University"
-                            v-model="university"
-                          >
-                          
-                          </v-text-field>
-                        <v-card-actions>
-                          <v-btn text color="green" @click="updateInfo">
-                            Update Information
-                          </v-btn>
-                        </v-card-actions>
-                        </v-card>
-                        </v-dialog>
-                      <v-dialog v-model="sendNoti" width="600">
-                        <v-card>
-                          <v-card-title 
-                            class="headline"
-                          >
-                            Your Notification
-                          </v-card-title>
-                          <v-text-field
-                            outlined
-                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
-                            label="Citizen Id"
-                            v-model="citizenId"
-                          >
-                          </v-text-field>
-                          <v-text-field
-                            outlined
-                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
-                            label="Title"
-                            v-model="name"
-                          >    
-                          </v-text-field>
-                          <v-textarea
-                            outlined
-                            style="margin-left: 10px; margin-right: 10px;"
-                            label="Detail"
-                            :value="`${informText}`"
-                            v-model="detail"
-                          >
-
-                          </v-textarea>
-                          <v-checkbox
-                            style="margin-left: 10px; margin-top: -20px;"
-                            :label="`Inform ${item.name} to his/her late payment`"
-                            @click="informText = `*** YOU'RE LATE FOR PAYMENT ***`"
-                          >
-                          
-                          </v-checkbox>
-                          <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="green darken-1" text @click="sendNotification">
-                              Send
-                            </v-btn>
-                          </v-card-actions>
-                        </v-card>
-                      </v-dialog>
-                  </td>
-                </template>
-                -->
               </v-data-table>
             </v-card>
           </v-col>
@@ -230,6 +109,11 @@ export default {
           title: "Bệnh nhân ngoại trú",
           icon: "mdi-plus-outline",
           link: "../doctor-dashboard/outpatient",
+        },
+        {
+          title: "Chỉ định thuốc",
+          icon: "mdi-medicine",
+          link: "../doctor-dashboard/medicine"
         },
         {
           title: "Cập nhật xét nghiệm",
@@ -287,7 +171,7 @@ export default {
   created() {
     setInterval(this.getNow, 1000)
     this.getNow()
-    this.getStudentInfo()
+    this.getInPatientInformation()
   },
   methods: {
     getNow() {
@@ -344,26 +228,25 @@ export default {
       })
       this.sendNoti = false
     },
-    getStudentInfo(){
-      axios.get('http://admin-database.herokuapp.com/student/getAll')
+    getInPatientInformation(){
+      axios.get('http://localhost:3000/inPatients/')
       .then(Response => {
-        this.userList = Response.data 
-        this.userLength = this.userList.length  
-        for(let i = 0; i < this.userLength; i++){
-          console.log(this.userList[i].room)
+        this.userList = Response.data
+        this.userLength = this.userList.length
+        for(let i = 0; i < this.userLength; i++) {
+          // console.log(this.userList[i].issn)
           this.users.push({
-            dormUID: 10000 + i,
-            name: this.userList[i].name,
-            citizenId: this.userList[i].citizenId,
+            id: this.userList[i].issn,
+            //name: this.userList[i].name,  
             room: this.userList[i].room,
-            email: this.userList[i].email,
-            studentId: this.userList[i].studentId,
-            university: this.userList[i].university
+            bed: this.userList[i].position,  
+            in_doctor: this.userList[i].indoctorssn,
+            out_doctor: this.userList[i].outdoctorssn
           })
         }
-      }) 
-    }  
-  },
+      })
+    },
+  }
 };
 </script>
 

@@ -8,6 +8,7 @@ import DoctorDashboard from '../views/doctor-dashboard.vue'
 import DoctorViewOutPatient from '../views/doctor-dashboard/outpatient.vue'
 import DoctorViewTest from '../views/doctor-dashboard/test.vue'
 import DoctorUpdateTest from '../views/doctor-dashboard/update-test.vue'
+import DoctorUpdateMedicine from '../views/doctor-dashboard/medicine.vue'
 
 import AdminDashboard from '../views/admin-dashboard.vue'
 import AdminViewInPatient from '../views/admin-dashboard/inpatient.vue'
@@ -63,6 +64,11 @@ const routes = [
     path: '/doctor-dashboard/view-test',
     name: 'doctor-dashboard-test',
     component: DoctorViewTest
+  },
+  {
+    path: '/doctor-dashboard/medicine',
+    name: 'doctor-dashboard-medicine',
+    component: DoctorUpdateMedicine
   },
 
   // below is admin routes

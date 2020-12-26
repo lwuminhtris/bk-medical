@@ -68,7 +68,7 @@
                 :single-expand="singleExpand"
                 :expanded.sync="expanded"
                 item-key="name"
-                show-expand
+
               >
               <!--
                 <template v-slot:expanded-item="{ headers, item}">
@@ -206,17 +206,12 @@ export default {
   data() {
     return {
       timestamp: '',
-      room: '',
-      email: '',
-      university: '',
-      studentId: '',
-      update: false,
-      citizenId: '',
+      id: '',
       name: '',
-      detail: '',
-      informText: "",
-      informLate: false,
-      sendNoti: false,
+      room: '',
+      bed: '',
+      in_doctor: '',
+      out_doctor: '',
       expanded: [],
       singleExpand: false,
       drawer: true,
@@ -230,6 +225,11 @@ export default {
           title: "Bệnh nhân ngoại trú",
           icon: "mdi-plus-outline",
           link: "doctor-dashboard/outpatient",
+        },
+        {
+          title: "Chỉ định thuốc",
+          icon: "mdi-medicine",
+          link: "doctor-dashboard/medicine"
         },
         {
           title: "Cập nhật xét nghiệm",
@@ -248,16 +248,16 @@ export default {
       search: "",
       headers: [
         {
-          text: "ID",
+          text: "Mã số CMND",
           align: "start",
           sortable: true,
-          value: "dormUID",
+          value: "id",
         },
         { text: "Họ và tên", value: "name" },
-        { text: "Mã số CMND", value: "citizenId" },
         { text: "Phòng bệnh", value: "room" },
-        { text: "Email", value: "email" },
-        { text: "Số điện thoại", value: "phone" },
+        { text: "Giường bệnh", value: "bed" },
+        { text: "Bác sĩ nhập viện", value: "in_doctor" },
+        { text: "Bác sĩ xuất viện", value: "out_doctor" },
       ],
       userLength: 0,
       userList: [],
@@ -287,7 +287,7 @@ export default {
   created() {
     setInterval(this.getNow, 1000)
     this.getNow()
-    this.getStudentInfo()
+    this.getInPatientInformation()
   },
   methods: {
     getNow() {
@@ -305,49 +305,31 @@ export default {
       const dateTime = date + " " + time;
       this.timestamp = dateTime;
     },
-    updateInfo() {
-      let config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      let data = {
-        room: this.room,
-        studentId: this.studentId,
-        email: this.email,
-        university: this.university,
-      };
-      axios.put('http://admin-database.herokuapp.com/student/updateInformation/' + this.citizenId, data, config)
-      .then((Response) => Response.data)
-      .then(({ room, email, studentId, university}) => {
-        this.room = room
-        this.studentId = studentId
-        this.email = email
-        this.university = university
+    getInPatientInformation(){
+      axios.get('http://localhost:3000/inPatients/')
+      .then(Response => {
+        this.userList = Response.data
+        this.userLength = this.userList.length
+        for(let i = 0; i < this.userLength; i++) {
+          // console.log(this.userList[i].issn)
+          this.users.push({
+            id: this.userList[i].issn,
+            //name: this.userList[i].name,  
+            room: this.userList[i].room,
+            bed: this.userList[i].position,  
+            in_doctor: this.userList[i].indoctorssn,
+            out_doctor: this.userList[i].outdoctorssn
+          })
+        }
       })
-      alert('Information updated')
-    },
-    sendNotification() {
-      let config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      let data = {
-        name: this.name,
-        detail: this.detail
-      };
-      axios.post('http://admin-database.herokuapp.com/notification/students/' + this.citizenId, data, config)
-      .then(({ name, detail }) => {
-        this.name = name
-        this.detail = detail
-      })
-      this.sendNoti = false
-    },
-    getStudentInfo(){
-      axios.get('http://admin-database.herokuapp.com/student/getAll')
+
+      
+      /*
+      axios.get('http://localhost:3000/inPatients/')
       .then(Response => {
         this.userList = Response.data 
+        console.log(this.userList)
+
         this.userLength = this.userList.length  
         for(let i = 0; i < this.userLength; i++){
           console.log(this.userList[i].room)
@@ -359,9 +341,12 @@ export default {
             email: this.userList[i].email,
             studentId: this.userList[i].studentId,
             university: this.userList[i].university
+            
           })
         }
+        
       }) 
+      */
     }  
   },
 };
