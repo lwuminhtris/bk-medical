@@ -11,11 +11,6 @@
         <v-col md="200px">
 
         </v-col>
-        <!--
-        <v-col md="auto" align-self="center">
-          <h4 style="margin-right: 50px; color: white;">CHỨC NĂNG CẬP NHẬT XÉT NGHIỆM CỦA BỆNH NHÂN</h4>
-        </v-col>
-        -->
       </v-row>
       <v-row align="center" justify="center" style="margin-top: 80px;">
         <v-col md="auto" sm="auto">
@@ -27,10 +22,11 @@
             outlined
             label="Mã id của đơn khám"
             style="width: 500px;"
-            v-model="examination_id"
+            v-model="examination_length"
+            disabled
           >
 
-          </v-text-field>
+          </v-text-field> 
 
           <v-text-field
             dark
@@ -94,59 +90,25 @@ export default {
       shift_id: 0,
       from_time: 0,
       to_time: 0,
+      examination_length: 0,
     };
   },
   computed: {
 
   },
   created() {
-    this.getDataFromServer();
-    this.getNumber();
+    this.getlength();
   },
   methods: {
-    getNumber(){
-      axios.get('http://admin-database.herokuapp.com/student-health/health/students/admin')
+    getlength() {
+      /*
+      axios.get('http://localhost:3000/examinations')
       .then(Response => {
-        this.adminHealth = Response.data.length
+        this.examination_length = Response.data.length
       })
-      axios.get('http://admin-database.herokuapp.com/student-health/health/students/' + this.id )
-      .then(Response => {
-        this.numberOfHealth = Response.data.length
-        console.log(this.numberOfHealth)
-        for(let i = 0; i < this.numberOfHealth; i++){
-          this.health.push({
-            title: Response.data[i].name,
-            detail: Response.data[i].detail
-          })
-        }
-      })
-    },
-    sendHealth(){
-      this.health.push({
-        title: this.name,
-        detail: this.detail
-      })
-      let config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      let data = {
-        name: this.name,
-        detail: this.detail,
-      };
-      axios.post('http://admin-database.herokuapp.com/student-health/health/students/' + this.id, data, config)
-      .then((Response) => Response.data[this.numberOfHealth + 1])
-      .then(({ name, detail}) => {
-        this.name = name
-        this.detail = detail
-      })
-      axios.post('http://admin-database.herokuapp.com/student-health/health/students/admin', data, config)
-      .then((Response) => Response.data[this.adminHealth + 1])
-      .then(({ name, detail}) => {
-        this.name = name
-        this.detail = detail
-      })
+      */
+      this.examination_length = 8
+      this.examination_id = this.examination_length
     },
     update_examination () {
       let data = {
@@ -170,6 +132,7 @@ export default {
         this.from_time = fromtime,
         this.to_time = totime
       })
+      window.alert("Cập nhật buổi khám thành công!")
     }
   },
 };
