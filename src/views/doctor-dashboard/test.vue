@@ -19,7 +19,7 @@
 
       </v-row>
       <v-row align="center" justify="center" style="margin-top: 80px;">
-          <h4 style="color: white;">CHỨC NĂNG KIỂM TRA XÉT NGHIỆM CỦA BỆNH NHÂN</h4>
+          <h4 style="color: white;">CHỨC NĂNG KIỂM TRA XÉT NGHIỆM</h4>
       </v-row>
       <v-row align="center" justify="center"  >
         <v-col md="auto" sm="auto">
@@ -29,8 +29,9 @@
           <v-text-field
             dark
             outlined
-            label="Nhập mã id của bệnh nhân"
+            label="Nhập mã id của buổi khám"
             style="width: 300px;"
+            v-model="id"
           >
             
           </v-text-field>
@@ -38,7 +39,7 @@
         <v-col md="auto">
           <v-btn
             style="margin-top: -31px; height: 55px; margin-left: -10px;"
-
+            @click="check"
           >
             Kiểm tra
           </v-btn>
@@ -70,93 +71,71 @@ export default {
     return {
       adminHealth: 0,
       numberOfHealth: 0,
+      /*
       name: '',
       detail: '',
       username: '',
       id: '',
       notation: '',
+      */
+      id: 0,
+      examination_id: [],
+      name: [],
+      result: [],
+      type_name: [],
+      notation: [],
+      doctor_in_ssn: [],
+      doctor_out_ssn: [],
       headers: [
-        { text: "Tên xét nghiệm", value: "title", sortable: false },
-        { text: "Người thực hiện", value: "detail", sortable: false },
-        { text: "Chi tiết xét nghiệm", value: "notation", sortable: false}
+        { text: "Tên xét nghiệm", value: "name", sortable: false },
+        { text: "Kết quả", value: "result", sortable: false },
+        { text: "Loại xét nghiệm", value: "type_name", sortable: false},
+        { text: "Ghi chú", value: "notation", sortable: false},
+        { text: "Người thực hiện", value: "doctor_in_ssn", sortable: false},
+        { text: "Người chẩn đoán", value: "doctor_out_ssn", sortable: false}
       ],
-      health: [
-        /*
-        {
-          title: "TEST",
-          detail: "TEST",
-        },
-        */
-      ],
+      test_list: [],
+      health: [],
     };
   },
   computed: {
-    bg() {
-      return this.background
-        ? "https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
-        : undefined;
-    },
+
   },
   created() {
-    this.getDataFromServer();
-    this.getNumber();
+    this.getInformation();
   },
   methods: {
-    getNumber(){
-      axios.get('http://admin-database.herokuapp.com/student-health/health/students/admin')
+    getInformation() {
+      axios.get('http://localhost:3000/testResults')
       .then(Response => {
-        this.adminHealth = Response.data.length
-      })
-      axios.get('http://admin-database.herokuapp.com/student-health/health/students/' + this.id )
-      .then(Response => {
-        this.numberOfHealth = Response.data.length
-        console.log(this.numberOfHealth)
-        for(let i = 0; i < this.numberOfHealth; i++){
-          this.health.push({
-            title: Response.data[i].name,
-            detail: Response.data[i].detail
-          })
+        this.test_list = Response.data
+        for(let i = 0; i < this.test_list.length; i++){
+          this.name[i] = this.test_list[i].tid
+          this.examination_id[i] = this.test_list[i].medicalExamination_id
+          this.notation[i] = this.test_list[i].note
+          this.result[i] = this.test_list[i].result
+          this.type_name[i] = this.test_list[i].type_name
+          this.doctor_in_ssn[i] = this.test_list[i].doctor_assign_ssn
+          this.doctor_out_ssn[i] = this.test_list[i].doctor_take_ssn
         }
       })
     },
-    sendHealth(){
-      this.health.push({
-        title: this.name,
-        detail: this.detail
-      })
-      let config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      let data = {
-        name: this.name,
-        detail: this.detail,
-      };
-      axios.post('http://admin-database.herokuapp.com/student-health/health/students/' + this.id, data, config)
-      .then((Response) => Response.data[this.numberOfHealth + 1])
-      .then(({ name, detail}) => {
-        this.name = name
-        this.detail = detail
-      })
-      axios.post('http://admin-database.herokuapp.com/student-health/health/students/admin', data, config)
-      .then((Response) => Response.data[this.adminHealth + 1])
-      .then(({ name, detail}) => {
-        this.name = name
-        this.detail = detail
-      })
-    },
-    getDataFromServer() {
-      /*
-      this.username = this.$store.state.gloUsername
-      this.id = this.$store.state.gloUserId
-      */
-      this.username = this.$store.state.gloUsername;
-      this.id = this.$store.state.gloUserId;
-      this.lock = true;
-      console.log(this.username);
-      console.log(this.id);
-    },
+
+    check() {
+      for(let i = 0; i < this.test_list.length; i++){
+        if(this.id == this.test_list[i].medicalExamination_id){
+          this.health.push({
+            name: this.test_list[i].tid,
+            notation: this.test_list[i].note,
+            result: this.test_list[i].result,
+            type_name: this.test_list[i].type_name,
+            doctor_in_ssn: this.test_list[i].doctor_assign_ssn,
+            doctor_out_ssn: this.test_list[i].doctor_take_ssn       
+          })
+        }
+      }
+    }
+
   },
 };
 </script>
