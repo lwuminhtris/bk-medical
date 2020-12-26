@@ -11,13 +11,6 @@
         <v-col md="200px">
 
         </v-col>
-
-        <!--
-        <v-col md="auto" align-self="center">
-          <h4 style="margin-right: 50px; color: white;">TỔNG HỢP CÁC CÔNG CỤ NÂNG CAO</h4>
-        </v-col>
-        -->
-
       </v-row>
       <v-row align="center" justify="center" style="margin-top: 80px;">
           <h3 style="color: white; margin-bottom: 10px;">DANH SÁCH BỆNH NHÂN NỘI TRÚ</h3>      
@@ -40,132 +33,10 @@
                 :headers="headers"
                 :items="users"
                 :search="search"
-                :single-expand="singleExpand"
                 :expanded.sync="expanded"
                 item-key="name"
-                show-expand
+                
               >
-              <!--
-                <template v-slot:expanded-item="{ headers, item}">
-                  <td :colspan="headers.length">
-                      <v-btn
-                        color="primary" 
-                        dark
-                        style="margin-left: 50px; font-size: 12px;"
-                        @click.stop="sendNoti = true"
-                      >
-                        Send Notification
-                      </v-btn>
-                      <v-btn
-                        color="error"
-                        dark
-                        style="margin-left: 5px; font-size: 12px;"
-                        @click.stop="update = true"
-                      >
-                        Update information
-                      </v-btn>
-                      <v-dialog v-model="update" width="600">
-                        <v-card>
-                          <v-card-title 
-                            class="headline"
-                          >
-                            Update student information
-                          </v-card-title>
-                          <v-text-field
-                            outlined
-                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
-                            label="Citizen Id"
-                            v-model="citizenId"
-                          >
-                          
-                          </v-text-field>
-                          <v-text-field
-                            outlined
-                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
-                            label="Room"
-                            v-model="room"
-                          >
-                          
-                          </v-text-field>
-                          <v-text-field
-                            outlined
-                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
-                            label="Email"
-                            v-model="email"
-                          >
-                          
-                          </v-text-field>
-                          <v-text-field
-                            outlined
-                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
-                            label="Student ID"
-                            v-model="studentId"
-                          >
-                          
-                          </v-text-field>
-                          <v-text-field
-                            outlined
-                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
-                            label="University"
-                            v-model="university"
-                          >
-                          
-                          </v-text-field>
-                        <v-card-actions>
-                          <v-btn text color="green" @click="updateInfo">
-                            Update Information
-                          </v-btn>
-                        </v-card-actions>
-                        </v-card>
-                        </v-dialog>
-                      <v-dialog v-model="sendNoti" width="600">
-                        <v-card>
-                          <v-card-title 
-                            class="headline"
-                          >
-                            Your Notification
-                          </v-card-title>
-                          <v-text-field
-                            outlined
-                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
-                            label="Citizen Id"
-                            v-model="citizenId"
-                          >
-                          </v-text-field>
-                          <v-text-field
-                            outlined
-                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
-                            label="Title"
-                            v-model="name"
-                          >    
-                          </v-text-field>
-                          <v-textarea
-                            outlined
-                            style="margin-left: 10px; margin-right: 10px;"
-                            label="Detail"
-                            :value="`${informText}`"
-                            v-model="detail"
-                          >
-
-                          </v-textarea>
-                          <v-checkbox
-                            style="margin-left: 10px; margin-top: -20px;"
-                            :label="`Inform ${item.name} to his/her late payment`"
-                            @click="informText = `*** YOU'RE LATE FOR PAYMENT ***`"
-                          >
-                          
-                          </v-checkbox>
-                          <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="green darken-1" text @click="sendNotification">
-                              Send
-                            </v-btn>
-                          </v-card-actions>
-                        </v-card>
-                      </v-dialog>
-                  </td>
-                </template>
-                -->
               </v-data-table>
             </v-card>
         </v-col>
@@ -179,29 +50,31 @@ const axios = require('axios')
 export default {
   data() {
     return {
-      adminHealth: 0,
-      numberOfHealth: 0,
-      name: '',
-      detail: '',
-      username: '',
       id: '',
-      notation: '',
-      citizenId: '',
+      name: '',
+      room: '',
+      bed: '',
+      in_doctor: '',
+      out_doctor: '',
+      insurance_id: '',
       headers: [
-        { text: "ID", value: "id", sortable: false },
-        { text: "Họ và tên", value: "name", sortable: false },
-        { text: "Mã số CMND", value: "citizendId", sortable: false},
-        { text: "Phòng bệnh", value: "", sortable: false},
-        { text: "Email", value: "email", sortable: false},
-        { text: "Số điện thoại", value: "phonenumber", sortable: false}
-      ],
-      health: [
-        /*
         {
-          title: "TEST",
-          detail: "TEST",
+          text: "Mã số CMND",
+          align: "start",
+          sortable: true,
+          value: "id",
         },
-        */
+        { text: "Họ và tên", value: "name" },
+        { text: "Phòng bệnh", value: "room" },
+        { text: "Giường bệnh", value: "bed" },
+        { text: "Bác sĩ nhập viện", value: "in_doctor" },
+        { text: "Bác sĩ xuất viện", value: "out_doctor" },
+        { text: "Mã bảo hiểm y tế", value: "insurance_id"},
+      ],
+      userLength: 0,
+      userList: [],
+      users: [
+
       ],
     };
   },
@@ -213,66 +86,29 @@ export default {
     },
   },
   created() {
-    this.getDataFromServer();
-    this.getNumber();
+    this.getInPatientInformation();
   },
   methods: {
-    getNumber(){
-      axios.get('http://admin-database.herokuapp.com/student-health/health/students/admin')
+    getInPatientInformation(){
+      axios.get('http://localhost:3000/inPatients/')
       .then(Response => {
-        this.adminHealth = Response.data.length
-      })
-      axios.get('http://admin-database.herokuapp.com/student-health/health/students/' + this.id )
-      .then(Response => {
-        this.numberOfHealth = Response.data.length
-        console.log(this.numberOfHealth)
-        for(let i = 0; i < this.numberOfHealth; i++){
-          this.health.push({
-            title: Response.data[i].name,
-            detail: Response.data[i].detail
+        this.userList = Response.data
+        this.userLength = this.userList.length
+        for(let i = 0; i < this.userLength; i++) {
+          // console.log(this.userList[i].issn)
+          this.users.push({
+            id: this.userList[i].issn,
+            name: this.userList[i].Patient_name,  
+            room: this.userList[i].room,
+            bed: this.userList[i].position,  
+            in_doctor: this.userList[i].indoctorssn,
+            out_doctor: this.userList[i].outdoctorssn,
+            insurance_id: this.userList[i].insurance_id,
           })
         }
       })
-    },
-    sendHealth(){
-      this.health.push({
-        title: this.name,
-        detail: this.detail
-      })
-      let config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      let data = {
-        name: this.name,
-        detail: this.detail,
-      };
-      axios.post('http://admin-database.herokuapp.com/student-health/health/students/' + this.id, data, config)
-      .then((Response) => Response.data[this.numberOfHealth + 1])
-      .then(({ name, detail}) => {
-        this.name = name
-        this.detail = detail
-      })
-      axios.post('http://admin-database.herokuapp.com/student-health/health/students/admin', data, config)
-      .then((Response) => Response.data[this.adminHealth + 1])
-      .then(({ name, detail}) => {
-        this.name = name
-        this.detail = detail
-      })
-    },
-    getDataFromServer() {
-      /*
-      this.username = this.$store.state.gloUsername
-      this.id = this.$store.state.gloUserId
-      */
-      this.username = this.$store.state.gloUsername;
-      this.id = this.$store.state.gloUserId;
-      this.lock = true;
-      console.log(this.username);
-      console.log(this.id);
-    },
-  },
+    }
+  }
 };
 </script>
 

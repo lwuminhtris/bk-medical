@@ -85,20 +85,10 @@ export default {
   data() {
     return {
       timestamp: '',
-      room: '',
-      email: '',
-      university: '',
-      studentId: '',
-      update: false,
-      citizenId: '',
+      id: '',
       name: '',
-      detail: '',
-      informText: "",
-      informLate: false,
-      sendNoti: false,
-      expanded: [],
-      singleExpand: false,
-      drawer: true,
+      next_examine_date: '',
+      insurance_id: '',
       items: [
         {
           title: "Bệnh nhân nội trú",
@@ -132,32 +122,19 @@ export default {
       search: "",
       headers: [
         {
-          text: "ID",
+          text: "Mã số CMND",
           align: "start",
           sortable: true,
-          value: "dormUID",
+          value: "id",
         },
         { text: "Họ và tên", value: "name" },
-        { text: "Mã số CMND", value: "citizenId" },
-        { text: "Phòng bệnh", value: "room" },
-        { text: "Email", value: "email" },
-        { text: "Số điện thoại", value: "phone" },
+        { text: "Ngày khám tiếp theo", value: "next_examine_date" },
+        { text: "Mã bảo hiểm y tế", value: "insurance_id" },
       ],
       userLength: 0,
       userList: [],
       users: [
-        /*
-        {
-          dormUID: "",
-          name: "",
-          citizenId: "",
-          room: "",
-          email: "",
-          phone: "",
-          studentId: "",
-          university: "",
-        },
-        */
+
       ],
     };
   },
@@ -175,7 +152,6 @@ export default {
   },
   methods: {
     getNow() {
-      
       const today = new Date();
       const date =
         today.getDate() +
@@ -189,59 +165,18 @@ export default {
       const dateTime = date + " " + time;
       this.timestamp = dateTime;
     },
-    updateInfo() {
-      let config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      let data = {
-        room: this.room,
-        studentId: this.studentId,
-        email: this.email,
-        university: this.university,
-      };
-      axios.put('http://admin-database.herokuapp.com/student/updateInformation/' + this.citizenId, data, config)
-      .then((Response) => Response.data)
-      .then(({ room, email, studentId, university}) => {
-        this.room = room
-        this.studentId = studentId
-        this.email = email
-        this.university = university
-      })
-      alert('Information updated')
-    },
-    sendNotification() {
-      let config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      let data = {
-        name: this.name,
-        detail: this.detail
-      };
-      axios.post('http://admin-database.herokuapp.com/notification/students/' + this.citizenId, data, config)
-      .then(({ name, detail }) => {
-        this.name = name
-        this.detail = detail
-      })
-      this.sendNoti = false
-    },
     getInPatientInformation(){
-      axios.get('http://localhost:3000/inPatients/')
+      axios.get('http://localhost:3000/OutPatients/')
       .then(Response => {
         this.userList = Response.data
         this.userLength = this.userList.length
         for(let i = 0; i < this.userLength; i++) {
           // console.log(this.userList[i].issn)
           this.users.push({
-            id: this.userList[i].issn,
-            //name: this.userList[i].name,  
-            room: this.userList[i].room,
-            bed: this.userList[i].position,  
-            in_doctor: this.userList[i].indoctorssn,
-            out_doctor: this.userList[i].outdoctorssn
+            id: this.userList[i].ossn,
+            name: this.userList[i].Patient_name,
+            next_examine_date: this.userList[i].next_examinate_date,  
+            insurance_id: this.userList[i].insurance_id
           })
         }
       })

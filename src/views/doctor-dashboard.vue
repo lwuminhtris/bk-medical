@@ -212,6 +212,7 @@ export default {
       bed: '',
       in_doctor: '',
       out_doctor: '',
+      insurance_id: '',
       expanded: [],
       singleExpand: false,
       drawer: true,
@@ -258,22 +259,12 @@ export default {
         { text: "Giường bệnh", value: "bed" },
         { text: "Bác sĩ nhập viện", value: "in_doctor" },
         { text: "Bác sĩ xuất viện", value: "out_doctor" },
+        { text: "Mã bảo hiểm y tế", value: "insurance_id"},
       ],
       userLength: 0,
       userList: [],
       users: [
-        /*
-        {
-          dormUID: "",
-          name: "",
-          citizenId: "",
-          room: "",
-          email: "",
-          phone: "",
-          studentId: "",
-          university: "",
-        },
-        */
+
       ],
     };
   },
@@ -314,39 +305,15 @@ export default {
           // console.log(this.userList[i].issn)
           this.users.push({
             id: this.userList[i].issn,
-            //name: this.userList[i].name,  
+            name: this.userList[i].Patient_name,  
             room: this.userList[i].room,
             bed: this.userList[i].position,  
             in_doctor: this.userList[i].indoctorssn,
-            out_doctor: this.userList[i].outdoctorssn
+            out_doctor: this.userList[i].outdoctorssn,
+            insurance_id: this.userList[i].insurance_id,
           })
         }
       })
-
-      
-      /*
-      axios.get('http://localhost:3000/inPatients/')
-      .then(Response => {
-        this.userList = Response.data 
-        console.log(this.userList)
-
-        this.userLength = this.userList.length  
-        for(let i = 0; i < this.userLength; i++){
-          console.log(this.userList[i].room)
-          this.users.push({
-            dormUID: 10000 + i,
-            name: this.userList[i].name,
-            citizenId: this.userList[i].citizenId,
-            room: this.userList[i].room,
-            email: this.userList[i].email,
-            studentId: this.userList[i].studentId,
-            university: this.userList[i].university
-            
-          })
-        }
-        
-      }) 
-      */
     }  
   },
 };
