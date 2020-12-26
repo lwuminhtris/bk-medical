@@ -64,7 +64,7 @@
               <b style="color: red;">KHẨN, CẬP NHẬT THÔNG BÁO CỦA BỘ Y TẾ VỀ TRƯỜNG HỢP BỆNH NHÂN 1342</b>
             </v-card-title>
             <v-card-subtitle>
-              <p style="text-align: left;">Đăng bởi: Ban Quản lý Bệnh viện Đại học Bách Khoa, 02/12/2020</p>
+              <p style="text-align: left;">Đăng bởi: Phòng thông tin Bệnh viện Đại học Bách Khoa, 02/12/2020</p>
             </v-card-subtitle>
             <v-card-text>
               <p style="text-align: left;">
@@ -97,7 +97,7 @@
               <b> THÔNG TIN VỀ VIỆC CÁCH LY KHOA TRUYỀN NHIỄM ĐỂ ĐIỀU TRỊ CHO BỆNH NHÂN COVID-19</b>
             </v-card-title>
             <v-card-subtitle>
-              <p style="text-align: left;">Đăng bởi: Ban Quản lý Bệnh viện Đại học Bách Khoa, 27/11/2020</p>
+              <p style="text-align: left;">Đăng bởi: Phòng thông tin Bệnh viện Đại học Bách Khoa, 27/11/2020</p>
             </v-card-subtitle>
             <v-card-text>
               <p style="text-align: left;">
@@ -147,17 +147,17 @@ export default {
         {
           title: "Thuốc đã sử dụng",
           icon: "mdi-plus-thick",
-          link: "user-dashboard/test  ",
+          link: "user-dashboard/medicine  ",
         },
         {
           title: "Xét nghiệm đã thực hiện",
           icon: "mdi-update",
-          link: "../doctor-dashboard/update-test"
+          link: "user-dashboard/test"
         },
         {
           title: "Bác sĩ điều trị",
           icon: "mdi-test-tube",
-          link: "doctor-dashboard/view-test",
+          link: "doctor-dashboard/doctor",
         },
         { title: "Đăng xuất", icon: "mdi-logout-variant", link: "/" },
       ],
