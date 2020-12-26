@@ -20,13 +20,24 @@
       <v-row align="center" justify="center" style="margin-top: 80px;">
         <v-col md="auto" sm="auto">
 
-          <h3 style="color: white; margin-bottom: 10px;">CHỨC NĂNG CẬP NHẬT XÉT NGHIỆM CỦA BỆNH NHÂN</h3>
+          <h3 style="color: white; margin-bottom: 10px;">CHỨC NĂNG CẬP NHẬT LỊCH KHÁM CỦA BỆNH NHÂN</h3>
+
+          <v-text-field
+            dark
+            outlined
+            label="Mã id của đơn khám"
+            style="width: 500px;"
+            v-model="examination_id"
+          >
+
+          </v-text-field>
 
           <v-text-field
             dark
             outlined
             label="Mã id của bệnh nhân"
-            style="width: 500px;"
+            style="width: 500px; margin-top: -20px;"
+            v-model="id"
           >
             
           </v-text-field>
@@ -34,23 +45,38 @@
           <v-text-field
             dark
             outlined
-            label="Tên người xét nghiệm"
+            label="Mã id buổi khám"
             style="width: 500px; margin-top: -20px;"
+            v-model="shift_id"
           >
             
           </v-text-field>
 
-          <v-textarea
-            outlined
+          <v-text-field
             dark
-            label="Thông tin chi tiết xét nghiệm"
-            style="margin-top: -20px;"
-          ></v-textarea>
+            outlined
+            label="Từ khoảng thời gian"
+            style="width: 500px; margin-top: -20px;"
+            v-model="from_time"
+          >
+            
+          </v-text-field>
+
+          <v-text-field
+            dark
+            outlined
+            label="Đến khoảng thời gian"
+            style="width: 500px; margin-top: -20px;"
+            v-model="to_time"
+          >
+            
+          </v-text-field>
 
           <v-btn
             style="margin-top: -20px; width: 100%;"
+            @click="update_examination"
           >
-            Cập nhật xét nghiệm
+            Cập nhật buổi khám
           </v-btn>
         </v-col>
       </v-row>
@@ -63,34 +89,15 @@ const axios = require('axios')
 export default {
   data() {
     return {
-      adminHealth: 0,
-      numberOfHealth: 0,
-      name: '',
-      detail: '',
-      username: '',
+      examination_id: 0,
       id: '',
-      notation: '',
-      headers: [
-        { text: "Tên xét nghiệm", value: "title", sortable: false },
-        { text: "Bác sĩ thực hiện", value: "detail", sortable: false },
-        { text: "Ghi chú", value: "notation", sortable: false}
-      ],
-      health: [
-        /*
-        {
-          title: "TEST",
-          detail: "TEST",
-        },
-        */
-      ],
+      shift_id: 0,
+      from_time: 0,
+      to_time: 0,
     };
   },
   computed: {
-    bg() {
-      return this.background
-        ? "https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
-        : undefined;
-    },
+
   },
   created() {
     this.getDataFromServer();
@@ -141,17 +148,29 @@ export default {
         this.detail = detail
       })
     },
-    getDataFromServer() {
-      /*
-      this.username = this.$store.state.gloUsername
-      this.id = this.$store.state.gloUserId
-      */
-      this.username = this.$store.state.gloUsername;
-      this.id = this.$store.state.gloUserId;
-      this.lock = true;
-      console.log(this.username);
-      console.log(this.id);
-    },
+    update_examination () {
+      let data = {
+        medical_examination_id: this.examination_id,
+        patient_ssn: this.id,
+        shift_id: this.shift_id,
+        fromtime: this.from_time,
+        totime: this.to_time,
+      }
+      let config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      axios.post('http://localhost:3000/examinations', data, config)
+      .then((Response) => Response.data[this.Response.data.length + 1])
+      .then(({medical_examination_id, patient_ssn, shift_id, fromtime, totime}) => {
+        this.examination_id = medical_examination_id,
+        this.id = patient_ssn,
+        this.shift_id = shift_id,
+        this.from_time = fromtime,
+        this.to_time = totime
+      })
+    }
   },
 };
 </script>

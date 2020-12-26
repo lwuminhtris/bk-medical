@@ -11,11 +11,6 @@
         <v-col md="200px">
 
         </v-col>
-        <!--
-        <v-col md="auto" align-self="center">
-          <h4 style="margin-right: 50px; color: white;">CHỨC NĂNG CẬP NHẬT XÉT NGHIỆM CỦA BỆNH NHÂN</h4>
-        </v-col>
-        -->
       </v-row>
       <v-row align="center" justify="center" style="margin-top: 80px;">
         <v-col md="auto" sm="auto">
@@ -25,8 +20,19 @@
           <v-text-field
             dark
             outlined
-            label="Mã id của bệnh nhân"
+            label="Mã id của buổi khám"
             style="width: 500px;"
+            v-model="examine_date"
+          >
+
+          </v-text-field>
+
+          <v-text-field
+            dark
+            outlined
+            label="Mã id của bệnh nhân"
+            style="width: 500px; margin-top: -20px;"
+            v-model="id"
           >
             
           </v-text-field>
@@ -36,6 +42,7 @@
             outlined
             label="Tên người chỉ định"
             style="width: 500px; margin-top: -20px;"
+            v-model="doctor_name"
           >
             
           </v-text-field>
@@ -45,10 +52,12 @@
             dark
             label="Thông tin chi tiết đơn thuốc"
             style="margin-top: -20px;"
+            v-model="detail"
           ></v-textarea>
 
           <v-btn
             style="margin-top: -20px; width: 100%;"
+            @click="update_medicine"
           >
             Cập nhật xét nghiệm
           </v-btn>
@@ -63,13 +72,10 @@ const axios = require('axios')
 export default {
   data() {
     return {
-      adminHealth: 0,
-      numberOfHealth: 0,
-      name: '',
-      detail: '',
-      username: '',
+      examinate_date: '',
       id: '',
-      notation: '',
+      doctor_name: '',
+      detail: '',
       headers: [
         { text: "Tên loại thuốc", value: "title", sortable: false },
         { text: "Người chỉ định", value: "detail", sortable: false },
@@ -141,17 +147,9 @@ export default {
         this.detail = detail
       })
     },
-    getDataFromServer() {
-      /*
-      this.username = this.$store.state.gloUsername
-      this.id = this.$store.state.gloUserId
-      */
-      this.username = this.$store.state.gloUsername;
-      this.id = this.$store.state.gloUserId;
-      this.lock = true;
-      console.log(this.username);
-      console.log(this.id);
-    },
+    update_medicine() {
+      window.alert("SSSSS")
+    }
   },
 };
 </script>

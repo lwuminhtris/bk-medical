@@ -105,7 +105,7 @@ export default {
           link: "../doctor-dashboard/medicine"
         },
         {
-          title: "Cập nhật xét nghiệm",
+          title: "Cập nhật lịch khám",
           icon: "mdi-update",
           link: "../doctor-dashboard/update-test"
         },

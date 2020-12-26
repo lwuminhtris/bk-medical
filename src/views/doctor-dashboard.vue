@@ -233,7 +233,7 @@ export default {
           link: "doctor-dashboard/medicine"
         },
         {
-          title: "Cập nhật xét nghiệm",
+          title: "Cập nhật lịch khám",
           icon: "mdi-update",
           link: "../doctor-dashboard/update-test"
         },
@@ -269,11 +269,7 @@ export default {
     };
   },
   computed: {
-    bg() {
-      return this.background
-        ? "https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
-        : undefined;
-    },
+
   },
   created() {
     setInterval(this.getNow, 1000)
