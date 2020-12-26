@@ -11,13 +11,6 @@
         <v-col md="200px">
 
         </v-col>
-
-        <!--
-        <v-col md="auto" align-self="center">
-          <h4 style="margin-right: 50px; color: white;">TỔNG HỢP CÁC CÔNG CỤ NÂNG CAO</h4>
-        </v-col>
-        -->
-
       </v-row>
       <v-row align="center" justify="center" style="margin-top: 80px;">
           <h3 style="color: white; margin-bottom: 10px;">DANH SÁCH BỆNH NHÂN NGOẠI TRÚ</h3>      
@@ -43,7 +36,6 @@
                 :single-expand="singleExpand"
                 :expanded.sync="expanded"
                 item-key="name"
-                show-expand
               >
               
               </v-data-table>
@@ -59,28 +51,25 @@ const axios = require('axios')
 export default {
   data() {
     return {
-      adminHealth: 0,
-      numberOfHealth: 0,
-      name: '',
-      detail: '',
-      username: '',
       id: '',
-      notation: '',
-      citizenId: '',
+      name: '',
+      next_examine_date: '',
+      insurance_id: '',
       headers: [
-        { text: "ID", value: "id", sortable: false },
-        { text: "Họ và tên", value: "name", sortable: false },
-        { text: "Mã số CMND", value: "citizendId", sortable: false},
-        { text: "Email", value: "email", sortable: false},
-        { text: "Số điện thoại", value: "phonenumber", sortable: false}
-      ],
-      health: [
-        /*
         {
-          title: "TEST",
-          detail: "TEST",
+          text: "Mã số CMND",
+          align: "start",
+          sortable: true,
+          value: "id",
         },
-        */
+        { text: "Họ và tên", value: "name" },
+        { text: "Ngày khám tiếp theo", value: "next_examine_date" },
+        { text: "Mã bảo hiểm y tế", value: "insurance_id" },
+      ],
+      userLength: 0,
+      userList: [],
+      users: [
+
       ],
     };
   },
@@ -92,7 +81,7 @@ export default {
     },
   },
   created() {
-    this.getDataFromServer();
+    this.getOutPatientInformation();
     this.getNumber();
   },
   methods: {
@@ -113,45 +102,23 @@ export default {
         }
       })
     },
-    sendHealth(){
-      this.health.push({
-        title: this.name,
-        detail: this.detail
-      })
-      let config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      let data = {
-        name: this.name,
-        detail: this.detail,
-      };
-      axios.post('http://admin-database.herokuapp.com/student-health/health/students/' + this.id, data, config)
-      .then((Response) => Response.data[this.numberOfHealth + 1])
-      .then(({ name, detail}) => {
-        this.name = name
-        this.detail = detail
-      })
-      axios.post('http://admin-database.herokuapp.com/student-health/health/students/admin', data, config)
-      .then((Response) => Response.data[this.adminHealth + 1])
-      .then(({ name, detail}) => {
-        this.name = name
-        this.detail = detail
+    getOutPatientInformation(){
+      axios.get('http://localhost:3000/OutPatients/')
+      .then(Response => {
+        this.userList = Response.data
+        this.userLength = this.userList.length
+        for(let i = 0; i < this.userLength; i++) {
+          // console.log(this.userList[i].issn)
+          this.users.push({
+            id: this.userList[i].ossn,
+            name: this.userList[i].Patient_name,
+            next_examine_date: this.userList[i].next_examinate_date,  
+            insurance_id: this.userList[i].insurance_id
+          })
+        }
       })
     },
-    getDataFromServer() {
-      /*
-      this.username = this.$store.state.gloUsername
-      this.id = this.$store.state.gloUserId
-      */
-      this.username = this.$store.state.gloUsername;
-      this.id = this.$store.state.gloUserId;
-      this.lock = true;
-      console.log(this.username);
-      console.log(this.id);
-    },
-  },
+  }
 };
 </script>
 

@@ -68,7 +68,6 @@
                 :single-expand="singleExpand"
                 :expanded.sync="expanded"
                 item-key="name"
-                show-expand
               >
               </v-data-table>
             </v-card>
@@ -148,7 +147,7 @@ export default {
   created() {
     setInterval(this.getNow, 1000)
     this.getNow()
-    this.getInPatientInformation()
+    this.getOutPatientInformation()
   },
   methods: {
     getNow() {
@@ -165,7 +164,7 @@ export default {
       const dateTime = date + " " + time;
       this.timestamp = dateTime;
     },
-    getInPatientInformation(){
+    getOutPatientInformation(){
       axios.get('http://localhost:3000/OutPatients/')
       .then(Response => {
         this.userList = Response.data

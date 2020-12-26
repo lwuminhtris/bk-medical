@@ -68,129 +68,7 @@
                 :single-expand="singleExpand"
                 :expanded.sync="expanded"
                 item-key="name"
-                show-expand
               >
-              <!--
-                <template v-slot:expanded-item="{ headers, item}">
-                  <td :colspan="headers.length">
-                      <v-btn
-                        color="primary" 
-                        dark
-                        style="margin-left: 50px; font-size: 12px;"
-                        @click.stop="sendNoti = true"
-                      >
-                        Send Notification
-                      </v-btn>
-                      <v-btn
-                        color="error"
-                        dark
-                        style="margin-left: 5px; font-size: 12px;"
-                        @click.stop="update = true"
-                      >
-                        Update information
-                      </v-btn>
-                      <v-dialog v-model="update" width="600">
-                        <v-card>
-                          <v-card-title 
-                            class="headline"
-                          >
-                            Update student information
-                          </v-card-title>
-                          <v-text-field
-                            outlined
-                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
-                            label="Citizen Id"
-                            v-model="citizenId"
-                          >
-                          
-                          </v-text-field>
-                          <v-text-field
-                            outlined
-                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
-                            label="Room"
-                            v-model="room"
-                          >
-                          
-                          </v-text-field>
-                          <v-text-field
-                            outlined
-                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
-                            label="Email"
-                            v-model="email"
-                          >
-                          
-                          </v-text-field>
-                          <v-text-field
-                            outlined
-                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
-                            label="Student ID"
-                            v-model="studentId"
-                          >
-                          
-                          </v-text-field>
-                          <v-text-field
-                            outlined
-                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
-                            label="University"
-                            v-model="university"
-                          >
-                          
-                          </v-text-field>
-                        <v-card-actions>
-                          <v-btn text color="green" @click="updateInfo">
-                            Update Information
-                          </v-btn>
-                        </v-card-actions>
-                        </v-card>
-                        </v-dialog>
-                      <v-dialog v-model="sendNoti" width="600">
-                        <v-card>
-                          <v-card-title 
-                            class="headline"
-                          >
-                            Your Notification
-                          </v-card-title>
-                          <v-text-field
-                            outlined
-                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
-                            label="Citizen Id"
-                            v-model="citizenId"
-                          >
-                          </v-text-field>
-                          <v-text-field
-                            outlined
-                            style="margin-left: 10px; margin-right: 10px; margin-bottom: -20px;"
-                            label="Title"
-                            v-model="name"
-                          >    
-                          </v-text-field>
-                          <v-textarea
-                            outlined
-                            style="margin-left: 10px; margin-right: 10px;"
-                            label="Detail"
-                            :value="`${informText}`"
-                            v-model="detail"
-                          >
-
-                          </v-textarea>
-                          <v-checkbox
-                            style="margin-left: 10px; margin-top: -20px;"
-                            :label="`Inform ${item.name} to his/her late payment`"
-                            @click="informText = `*** YOU'RE LATE FOR PAYMENT ***`"
-                          >
-                          
-                          </v-checkbox>
-                          <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="green darken-1" text @click="sendNotification">
-                              Send
-                            </v-btn>
-                          </v-card-actions>
-                        </v-card>
-                      </v-dialog>
-                  </td>
-                </template>
-                -->
               </v-data-table>
             </v-card>
           </v-col>
@@ -206,20 +84,14 @@ export default {
   data() {
     return {
       timestamp: '',
-      room: '',
-      email: '',
-      university: '',
-      studentId: '',
-      update: false,
-      citizenId: '',
+      id: '',
+      year_exp: '',
+      department_name: '',
       name: '',
-      detail: '',
-      informText: "",
-      informLate: false,
-      sendNoti: false,
-      expanded: [],
-      singleExpand: false,
-      drawer: true,
+      bdate: '',
+      gender: '',
+      phone_number: '',
+      salary: '',
       items: [
         {
           title: "Danh sách bác sĩ ",
@@ -251,29 +123,18 @@ export default {
           text: "ID",
           align: "start",
           sortable: true,
-          value: "dormUID",
+          value: "id",
         },
         { text: "Họ và tên", value: "name" },
-        { text: "Khoa ", value: "citizenId" },
-        { text: "Thời gian trực gần nhất", value: "room" },
-        { text: "Email", value: "email" },
-        { text: "Số điện thoại", value: "phone" },
+        { text: "Giới tính", value: "gender" },
+        { text: "Ngày sinh", value: "bdate" },
+        { text: "Khoa", value: "department_name" },
+        { text: "Tiền lương", value: "salary" },
       ],
       userLength: 0,
       userList: [],
       users: [
-        /*
-        {
-          dormUID: "",
-          name: "",
-          citizenId: "",
-          room: "",
-          email: "",
-          phone: "",
-          studentId: "",
-          university: "",
-        },
-        */
+
       ],
     };
   },
@@ -287,7 +148,7 @@ export default {
   created() {
     setInterval(this.getNow, 1000)
     this.getNow()
-    this.getStudentInfo()
+    this.getDoctorInformation()
   },
   methods: {
     getNow() {
@@ -305,60 +166,20 @@ export default {
       const dateTime = date + " " + time;
       this.timestamp = dateTime;
     },
-    updateInfo() {
-      let config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      let data = {
-        room: this.room,
-        studentId: this.studentId,
-        email: this.email,
-        university: this.university,
-      };
-      axios.put('http://admin-database.herokuapp.com/student/updateInformation/' + this.citizenId, data, config)
-      .then((Response) => Response.data)
-      .then(({ room, email, studentId, university}) => {
-        this.room = room
-        this.studentId = studentId
-        this.email = email
-        this.university = university
-      })
-      alert('Information updated')
-    },
-    sendNotification() {
-      let config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      let data = {
-        name: this.name,
-        detail: this.detail
-      };
-      axios.post('http://admin-database.herokuapp.com/notification/students/' + this.citizenId, data, config)
-      .then(({ name, detail }) => {
-        this.name = name
-        this.detail = detail
-      })
-      this.sendNoti = false
-    },
-    getStudentInfo(){
-      axios.get('http://admin-database.herokuapp.com/student/getAll')
+    getDoctorInformation(){
+      axios.get('http://localhost:3000/doctors')
       .then(Response => {
         this.userList = Response.data 
         this.userLength = this.userList.length  
         for(let i = 0; i < this.userLength; i++){
-          console.log(this.userList[i].room)
           this.users.push({
-            dormUID: 10000 + i,
-            name: this.userList[i].name,
-            citizenId: this.userList[i].citizenId,
-            room: this.userList[i].room,
-            email: this.userList[i].email,
-            studentId: this.userList[i].studentId,
-            university: this.userList[i].university
+            id: this.userList[i].dssn,
+            name: this.userList[i].ename,
+            gender: this.userList[i].gender,
+            bdate: this.userList[i].bdate,
+            department_name: this.userList[i].departmentName,
+            phone_number: this.userList[i].phone_number,
+            salary: this.userList[i].salary
           })
         }
       }) 
