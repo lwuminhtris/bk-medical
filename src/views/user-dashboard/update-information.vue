@@ -3,7 +3,7 @@
     <v-content>
       <v-row justify="start" style="background-color: black;">
         <v-col md="auto" style="margin-left: 50px;">
-          <v-btn to="../admin-dashboard">
+          <v-btn to="../user-dashboard">
             <v-icon style="margin-bottom: 3px;"> mdi-keyboard-backspace </v-icon>
             QUAY LẠI DASHBOARD
           </v-btn>
@@ -11,25 +11,51 @@
         <v-col md="200px">
 
         </v-col>
-
+        <!--
         <v-col md="auto" align-self="center">
-          <h4 style="margin-right: 50px; color: white;">TỔNG HỢP CÁC CÔNG CỤ NÂNG CAO</h4>
+          <h4 style="margin-right: 50px; color: white;">CHỨC NĂNG KIỂM TRA XÉT NGHIỆM CỦA BỆNH NHÂN</h4>
         </v-col>
+        -->
 
       </v-row>
       <v-row align="center" justify="center" style="margin-top: 80px;">
+          <h4 style="color: white;">CHỨC NĂNG CẬP NHẬT THÔNG TIN CÁ NHÂN  </h4>
+      </v-row>
+      <v-row align="center" justify="center"  >
         <v-col md="auto" sm="auto">
-          <v-tabs>
-            <v-tabs-slider></v-tabs-slider>
-            <v-tab href="#tab1">Tổng số xét nghiệm cụ thể</v-tab>
-            <v-tab>Tổng bệnh nhân nhập viện cụ thể</v-tab>
-          </v-tabs>
-
-          <v-tabs-items>
-            <v-tab-item>
+          <v-row>
+            <v-text-field
+              dark
+              outlined
+              label="Thay đổi tên đăng nhập"
+              style="width: 300px;"
+            >
               
-            </v-tab-item>
-          </v-tabs-items>
+            </v-text-field>
+
+            <v-btn
+             style="margin-left: 10px; height: 55px;"
+            >
+            Cập nhật
+            </v-btn>
+          </v-row>
+          <v-row style="margin-top: -12px;">
+          <v-text-field
+            dark
+            outlined
+            label="Thay đổi mật khẩu"
+            style="width: 300px;"
+          >
+            
+          </v-text-field>
+   
+          
+          <v-btn
+            style="height: 55px; margin-left: 10px;"
+          >
+            Cập nhật
+          </v-btn>
+          </v-row>
         </v-col>
       </v-row>
     </v-content>
@@ -50,8 +76,8 @@ export default {
       notation: '',
       headers: [
         { text: "Tên xét nghiệm", value: "title", sortable: false },
-        { text: "Bác sĩ thực hiện", value: "detail", sortable: false },
-        { text: "Ghi chú", value: "notation", sortable: false}
+        { text: "Người thực hiện", value: "detail", sortable: false },
+        { text: "Chi tiết xét nghiệm", value: "notation", sortable: false}
       ],
       health: [
         /*

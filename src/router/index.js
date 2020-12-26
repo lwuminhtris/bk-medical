@@ -17,6 +17,8 @@ import AdminAdvancedSearch from '../views/admin-dashboard/advanced-search.vue'
 import UserDashboard from '../views/user-dashboard.vue'
 // import UserDashboardMedicine from '.../views/user-dashboard/medicine.vue'
 import UserDashboardTest from '../views/user-dashboard/test.vue'
+import UserDashboardUpdateInformation from '../views/user-dashboard/update-information.vue'
+
 
 Vue.use(VueRouter)
 
@@ -91,11 +93,15 @@ const routes = [
     name: 'user-dashboard',
     component: UserDashboard
   },
-
   {
     path: '/user-dashboard/test',
     name: 'user-dashboard-test',
     component: UserDashboardTest
+  },
+  {
+    path: '/user-dashboard/update-information',
+    name: 'user-dashboard-update-information',
+    component: UserDashboardUpdateInformation
   }
 ]
 
