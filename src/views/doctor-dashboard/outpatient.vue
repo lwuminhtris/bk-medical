@@ -222,26 +222,26 @@ export default {
       drawer: true,
       items: [
         {
-          title: "Bệnh nhân ngoại trú",
-          icon: "mdi-plus-outline",
+          title: "Bệnh nhân nội trú",
+          icon: "mdi-plus-thick",
           link: "../doctor-dashboard",
         },
         {
-          title: "Bệnh nhân nội trú",
-          icon: "mdi-plus-thick",
-          link: "../doctor-dashboard/inpatient",
+          title: "Bệnh nhân ngoại trú",
+          icon: "mdi-plus-outline",
+          link: "../doctor-dashboard/outpatient",
         },
         {
           title: "Cập nhật xét nghiệm",
-          icon: "mdi-security",
+          icon: "mdi-update",
           link: "../doctor-dashboard/update-test"
         },
         {
           title: "Kiểm tra xét nghiệm",
-          icon: "mdi-security",
-          link: "../doctor-dashboard/view-test",
+          icon: "mdi-test-tube",
+          link: "doctor-dashboard/view-test",
         },
-        { title: "Đăng xuất", icon: "mdi-logout-variant", link: "login" },
+        { title: "Đăng xuất", icon: "mdi-logout-variant", link: "/" },
       ],
       permanent: true,
       background: false,

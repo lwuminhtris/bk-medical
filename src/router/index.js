@@ -5,7 +5,7 @@ import Register from '../views/register.vue'
 import Login from '../views/login.vue'
 
 import DoctorDashboard from '../views/doctor-dashboard.vue'
-import DoctorViewInPatient from '../views/doctor-dashboard/inpatient.vue'
+import DoctorViewOutPatient from '../views/doctor-dashboard/outpatient.vue'
 import DoctorViewTest from '../views/doctor-dashboard/test.vue'
 import DoctorUpdateTest from '../views/doctor-dashboard/update-test.vue'
 
@@ -50,9 +50,9 @@ const routes = [
     component: DoctorDashboard
   },
   {
-    path: '/doctor-dashboard/inpatient',
-    name: 'doctor-dashboard-inpatient',
-    component: DoctorViewInPatient
+    path: '/doctor-dashboard/outpatient',
+    name: 'doctor-dashboard-outpatient',
+    component: DoctorViewOutPatient
   },
   {
     path: '/doctor-dashboard/update-test',

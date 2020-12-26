@@ -51,7 +51,7 @@
           <v-col md="auto">
             <v-card style="margin-left: 120px; margin-right: -120px;" light>
               <v-card-title>
-                Danh sách bệnh nhân
+                Danh sách bệnh nhân nội trú
                 <v-spacer></v-spacer>
                 <v-text-field
                   v-model="search"
@@ -222,14 +222,14 @@ export default {
       drawer: true,
       items: [
         {
-          title: "Bệnh nhân ngoại trú",
-          icon: "mdi-plus-outline",
+          title: "Bệnh nhân nội trú",
+          icon: "mdi-plus-thick",
           link: "doctor-dashboard",
         },
         {
-          title: "Bệnh nhân nội trú",
-          icon: "mdi-plus-thick",
-          link: "doctor-dashboard/inpatient",
+          title: "Bệnh nhân ngoại trú",
+          icon: "mdi-plus-outline",
+          link: "doctor-dashboard/outpatient",
         },
         {
           title: "Cập nhật xét nghiệm",
