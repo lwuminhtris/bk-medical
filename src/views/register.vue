@@ -44,6 +44,7 @@
                     style="margin-top: -20px;"
                   ></v-text-field>
 
+                <!--
                   <v-text-field
                     dark
                     v-model="email"
@@ -53,10 +54,11 @@
                     required
                     style="margin-top: -20px;"
                   ></v-text-field>
+                -->
 
                   <v-text-field
                     dark
-                    v-model="fullName"
+                    v-model="name"
                     :rules="fullNameRules"
                     outlined
                     label="Họ và tên"
@@ -64,6 +66,7 @@
                     style="margin-top: -20px;"
                   ></v-text-field>
 
+              <!--
                   <v-select
                     dark
                     v-model="gender"
@@ -82,6 +85,7 @@
                     required
                     style="margin-top: -20px;"
                   ></v-text-field>
+              -->
 
                   <v-text-field
                     dark
@@ -102,6 +106,7 @@
                     style="margin-top: -20px;"
                   ></v-text-field>
 
+              <!--
                   <v-text-field
                     dark
                     v-model="phonenumber"
@@ -119,6 +124,7 @@
                     required
                     style="margin-top: -20px;"
                   ></v-text-field>
+                -->
 
                   <v-btn
                     class="white--text"
@@ -141,7 +147,7 @@
 </template>
 
 <script>
-// const axios = require("axios");
+const axios = require("axios");
 export default {
   data() {
     return {
@@ -153,12 +159,12 @@ export default {
       password: "",
       rePassword: "",
       email: "",
-      fullName: "",
+      name: "",
       age: "",
-      citizenID: "",
+      citizenID: 0,
       address: "",
       phonenumber: "",
-      medicalId: "",
+      medicalId: 0,
       gender: "",
       genderList: ['Nam', 'Nữ'],
       numberOfStudent: 0,
@@ -187,7 +193,37 @@ export default {
 
   },
   methods: {
-    
+    register () {
+      let data = {
+        username: this.username,
+        password: this.password,
+        userSsn: this.citizenID,
+        name: this.name,
+        insurance: this.medicalId,
+      }
+
+      let config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+
+      axios.post('http://localhost:3000/users/patient/', data, config)
+      .then((Response) => Response.data[this.Response.data.length + 1])
+      .then(({username, password, userSsn, name, insurance}) => {
+        this.username = username,
+        this.password = password,
+        this.citizenID = userSsn,
+        this.name = name,
+        this.medicalId = insurance
+      })
+      .catch((error) => {
+        window.alert(error)
+        // console.log(error)
+      })
+      window.alert("Đăng ký thành công")
+      this.$router.replace('/')
+    }
   },
 };
 </script>

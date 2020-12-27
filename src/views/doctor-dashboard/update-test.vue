@@ -125,6 +125,7 @@ export default {
       };
       axios.post('http://localhost:3000/examinations', data, config)
       .then((Response) => Response.data[this.Response.data.length + 1])
+      //.then(Response => Response.data)
       .then(({medical_examination_id, patient_ssn, shift_id, fromtime, totime}) => {
         this.examination_id = medical_examination_id,
         this.id = patient_ssn,

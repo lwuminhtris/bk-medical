@@ -18,7 +18,7 @@
       <v-row align="center" justify="center" style="margin-top: 80px">
         <h4 style="color: white">CHỨC NĂNG CẬP NHẬT THÔNG TIN CÁ NHÂN</h4>
       </v-row>
-      <v-row align="center" justify="center">
+      <v-row align="center"   justify="center">
         <v-col md="auto" sm="auto">
           <v-row>
             <v-text-field
@@ -87,11 +87,7 @@ export default {
     };
   },
   computed: {
-    bg() {
-      return this.background
-        ? "https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
-        : undefined;
-    },
+
   },
   created() {
     this.getDataFromServer();

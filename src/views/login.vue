@@ -44,7 +44,7 @@
                 <v-btn
                   class="white--text"
                   color="hsl(227, 58%, 65%)"
-                  @click="checkSigningIn"
+                  @click="login"
                 >ĐĂNG NHẬP</v-btn>
           </v-col>
         </v-row>
@@ -54,9 +54,11 @@
 </template>
 
 <script>
-// const axios = require('axios')
+const axios = require('axios')
 export default {
   data: () => ({
+    username: '',
+    password: '',
     cmp_username: [],
     cmp_password: [],
     name: [],
@@ -64,15 +66,14 @@ export default {
     numberOfStudent: 0,
     valid: false,
     show1: false,
-    username: "",
-    password: "",
   }),
   created(){
 
   },
   methods: {
-    checkSigningIn(){
+    login() {
       // for testing purpose
+      
       let username = this.username
       let password = this.password
       if(username == "doctor" && password == "doctor"){
@@ -80,6 +81,34 @@ export default {
       } else if(username == "manager" && password == "manager") {
         this.$router.replace("/manager-dashboard")
       }
+  
+
+      let data = {
+        username: this.username,
+        password: this.password
+      }
+
+      let config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+
+      axios.post('http://localhost:3000/users/login', data, config)
+      //.then(data=>console.log(data))
+      .then(data => {
+        let ssn = data.data.ssn
+        if(ssn[0] == 'D') {
+          this.$router.replace("/doctor-dashboard")
+        }
+        if(ssn[0] == 'M') {
+          this.$router.replace("/admin-dashboard")
+        }
+        if(ssn[0] == '1') {
+          this.$router.replace("/user-dashboard")
+        }
+      })
+      //.then(console.log(Response.data))
     }
   },
   
